@@ -1,8 +1,8 @@
 ---
 - name: Install Curl
   package:
-    - name: curl
-    - state: present
+    name: curl
+    state: present
 
 - name: Register the packagecloud key
   tags: blackfire

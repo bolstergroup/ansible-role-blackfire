@@ -24,8 +24,10 @@
 - name: Restart Blackfire, PHP and NGINX services.
   tags: blackfire
   sudo: true
+  service:
+    name: blackfire-agent
+    state: restarted
   notify:
-    - reload blackfire
     - reload php-fpm
     - reload nginx
   when: agent_configuration_state|changed

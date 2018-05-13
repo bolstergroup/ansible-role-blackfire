@@ -1,9 +1,8 @@
 ---
-
-## Debian tasks
-
 - name: Install Curl
-  apt: name=curl state=present
+  package:
+    - name: curl
+    - state: present
 
 - name: Register the packagecloud key
   tags: blackfire
@@ -20,8 +19,11 @@
 
 - name: Install the blackfire-agent package
   tags: blackfire
-  apt: name=blackfire-agent state=present
+  apt:
+    name: blackfire-agent
+    state: present
 
 - name: Install the blackfire-php package
-  tags: blackfire
-  apt: name=blackfire-php state=present
+  apt:
+    name: blackfire-php
+    state: present

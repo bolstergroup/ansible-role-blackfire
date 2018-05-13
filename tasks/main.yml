@@ -1,6 +1,4 @@
 ---
-# tasks file for blackfire.
-
 - name: Include OS specific vars
   tags: blackfire
   include_vars: "os_family/{{ ansible_os_family }}.yml"
@@ -23,16 +21,11 @@
     mode=0644
   register: agent_configuration_state
 
-- name: Service blackfire-agent restart
+- name: Restart Blackfire, PHP and NGINX services.
   tags: blackfire
   sudo: true
-  service: name=blackfire-agent state=restarted
   notify:
-    - restart php-fpm
-    - restart apache
+    - reload blackfire
+    - reload php-fpm
+    - reload nginx
   when: agent_configuration_state|changed
-
-- name: Restart apache if enable in configuration
-  tags: blackfire
-  service: name=apache2 state=restarted
-  when: blackfire_apache_enable

@@ -1,13 +1,15 @@
 ---
-
-- name: restart php-fpm
+- name: reload blackfire
   service:
-    name: "{{ blackfire_php_fpm_daemon }}"
+    name: blackfire-agent
     state: restarted
-  when: blackfire_php_fpm_enable and agent_configuration_state|changed
 
-- name: restart apache
+- name: reload php-fpm
   service:
-    name: apache2
-    state: restarted
-  when: blackfire_apache_enable and agent_configuration_state|changed
+    name: php7.2-fpm
+    state: reloaded
+
+- name: reload nginx
+  service:
+    name: nginx
+    state: reloaded
